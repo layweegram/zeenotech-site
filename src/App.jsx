@@ -2,76 +2,211 @@ import React, { useState, useRef } from 'react';
 
 export default function App() {
   const [service, setService] = useState('Repair');
+  const formRef = useRef(null);
 
-  const formRef = useRef(null); 
-  const scrollToForm = (type) => { 
-    setService(type); 
-    setTimeout(() => { 
-      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-    }, 50); 
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    details: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log({
+      service,
+      ...formData,
+    });
+
+    alert('Request submitted successfully!');
+  };
+
+  const scrollToForm = (type) => {
+    setService(type);
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }, 50);
   };
 
   return (
-    <div style={styles.container}>
-      {/* Header / Hero Section */}
-      <header style={styles.header}>
-        <h1 style={styles.title}>ZEENOTECH</h1>
-        <p style={styles.subtitle}>Properly Sourced. Tested. Delivered.</p>
-        <div style={styles.heroBtnGroup}>
-          <button style={styles.primaryBtn} onClick={() => scrollToForm('Repair')}>
+    <div style={styles.page}>
+      {/* HERO */}
+      <section style={styles.hero}>
+        <h1 style={styles.heroTitle}>
+          We make buying, selling, and repairing your devices
+          <span style={styles.blue}> simple, safe, and completely traceable.</span>
+        </h1>
+
+        <p style={styles.heroText}>
+          No guesswork. No street-level hassle. Just trusted technicians,
+          verified devices, and real status updates from start to finish.
+        </p>
+
+        <div style={styles.badge}>
+          YOUR TRUSTED DEVICE SOLUTIONS • PROPERLY SOURCED. TESTED. DELIVERED.
+        </div>
+
+        <div style={styles.ctaRow}>
+          <button
+            style={styles.primaryBtn}
+            onClick={() => scrollToForm('Repair')}
+          >
             ⚡ Book a Repair
           </button>
-          <button style={styles.secondaryBtn} onClick={() => scrollToForm('Sourcing')}>
+
+          <button
+            style={styles.secondaryBtn}
+            onClick={() => scrollToForm('Sourcing')}
+          >
             📦 Request Device Sourcing
           </button>
         </div>
-      </header>
-
-      {/* Services Section */}
-      <section style={styles.servicesSection}>
-        <ServiceCard title="Repair" text="Professional diagnostic and hardware repair services." />
-        <ServiceCard title="Buy" text="Quality-tested, certified devices ready for deployment." />
-        <ServiceCard title="Upgrade" text="Seamless system and component upgrades." />
-        <ServiceCard title="Swap" text="Trade in your old device towards an upgrade." />
       </section>
 
-      {/* Form Section */}
+      {/* SERVICES */}
+      <section style={styles.services}>
+        <h2 style={styles.sectionTitle}>Repair, Buy, Upgrade & Swap</h2>
+        <p style={styles.sectionText}>
+          Everything your device needs — handled through one verified,
+          trusted process.
+        </p>
+
+        <div style={styles.cardGrid}>
+          <ServiceCard
+            title="Repair"
+            icon="🛠️"
+            text="Professional diagnostics and verified repairs — fully documented from intake to delivery."
+          />
+
+          <ServiceCard
+            title="Buy"
+            icon="📱"
+            text="Properly sourced, tested, and certified devices. Every unit is traceable and verified."
+          />
+
+          <ServiceCard
+            title="Upgrade"
+            icon="⬆️"
+            text="Verified upgrade paths with full component testing. Trade up with confidence."
+          />
+
+          <ServiceCard
+            title="Swap"
+            icon="🔄"
+            text="Simple, transparent device swaps with fair-value grading and real tracking."
+          />
+        </div>
+      </section>
+
+      {/* FORM */}
       <section ref={formRef} style={styles.formSection}>
-        <h2>Request Service ({service})</h2>
-        <form style={styles.form} onSubmit={(e) => e.preventDefault()}>
-          <input type="text" placeholder="Full Name" style={styles.input} required />
-          <input type="email" placeholder="Email Address" style={styles.input} required />
-          <input type="tel" placeholder="Phone Number" style={styles.input} required />
-          <textarea placeholder="Describe your issue or request..." style={styles.textarea} rows={4} required></textarea>
-          <button type="submit" style={styles.submitBtn}>Submit Request</button>
-        </form>
+        <div style={styles.formCard}>
+          <h2 style={styles.sectionTitle}>Request a Service</h2>
+
+          <div style={styles.tabRow}>
+            {['Repair', 'Sourcing'].map((item) => (
+              <button
+                key={item}
+                onClick={() => setService(item)}
+                style={{
+                  ...styles.tabBtn,
+                  ...(service === item ? styles.activeTab : {}),
+                }}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+
+          <form onSubmit={handleSubmit} style={styles.form}>
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Full Name *"
+              required
+              value={formData.fullName}
+              onChange={handleChange}
+              style={styles.input}
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address *"
+              required
+              value={formData.email}
+              onChange={handleChange}
+              style={styles.input}
+            />
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone / WhatsApp Number *"
+              required
+              value={formData.phone}
+              onChange={handleChange}
+              style={styles.input}
+            />
+
+            <textarea
+              name="details"
+              rows={5}
+              placeholder={`Describe your ${service.toLowerCase()} request...`}
+              value={formData.details}
+              onChange={handleChange}
+              style={styles.textarea}
+            />
+
+            <button type="submit" style={styles.submitBtn}>
+              Submit Request
+            </button>
+          </form>
+        </div>
       </section>
 
-      {/* Corporate Footer */}
+      {/* FOOTER */}
       <footer style={styles.footer}>
         <div style={styles.footerLogo}>⚡</div>
+
         <h3 style={{ margin: 0, letterSpacing: 1 }}>ZEENOTECH</h3>
+
         <p style={{ color: '#EAB308', fontWeight: 700, marginTop: 8 }}>
           Properly Sourced. Tested. Delivered.
         </p>
+
         <div style={styles.footerLine} />
+
         <div style={{ lineHeight: 1.8 }}>
           <p style={{ color: '#FFFFFF', fontWeight: 700 }}>Corporate Office</p>
           <p style={{ color: '#CBD5E1' }}>The Philippi Centre, Oluwalogbon House</p>
           <p style={{ color: '#CBD5E1' }}>Alausa, Ikeja, Lagos</p>
           <p style={{ color: '#CBD5E1' }}>RC: 9370590</p>
         </div>
+
         <div style={styles.footerLine} />
+
         <p style={{ color: '#94A3B8', fontSize: 14 }}>
           © 2026 Zeenotech · RC: 9370590
         </p>
       </footer>
 
-      {/* Floating WhatsApp Button */}
-      <a 
-        href="https://wa.me/234XXXXXXXXXX?text=Hello%20Zeenotech,%20I%20need%20help%20with%20my%20device." 
-        target="_blank" 
-        rel="noreferrer" 
+      {/* WHATSAPP FLOATING BUTTON */}
+      <a
+        href="https://wa.me/2348139650067?text=Hello%20Zeenotech,%20I%20need%20help%20with%20my%20device."
+        target="_blank"
+        rel="noreferrer"
         style={styles.whatsappBtn}
       >
         💬
@@ -80,17 +215,10 @@ export default function App() {
   );
 }
 
-function ServiceCard({ title, text }) {
-  const icons = {
-    Repair: '🛠️',
-    Buy: '📱',
-    Upgrade: '⬆️',
-    Swap: '🔄',
-  };
-
+function ServiceCard({ title, text, icon }) {
   return (
     <div style={styles.card}>
-      <div style={styles.cardIcon}>{icons[title]}</div>
+      <div style={styles.cardIcon}>{icon}</div>
       <h3 style={{ marginTop: 16 }}>{title}</h3>
       <p style={{ color: '#475569', lineHeight: 1.6 }}>{text}</p>
     </div>
@@ -98,125 +226,218 @@ function ServiceCard({ title, text }) {
 }
 
 const styles = {
-  container: {
-    fontFamily: 'system-ui, -apple-system, sans-serif',
+  page: {
+    fontFamily: 'Inter, Arial, sans-serif',
+    background: '#F8FAFC',
     color: '#0F172A',
-    backgroundColor: '#F8FAFC',
-    minHeight: '100vh',
-    position: 'relative',
   },
-  header: {
-    padding: '60px 20px',
+
+  hero: {
+    maxWidth: 900,
+    margin: '0 auto',
+    padding: '80px 20px 60px',
     textAlign: 'center',
-    backgroundColor: '#0F172A',
-    color: '#FFFFFF',
   },
-  title: {
-    fontSize: '36px',
-    margin: 0,
-    letterSpacing: '2px',
+
+  heroTitle: {
+    fontSize: 'clamp(36px, 6vw, 64px)',
+    lineHeight: 1.1,
+    marginBottom: 24,
+    fontWeight: 800,
   },
-  subtitle: {
-    color: '#EAB308',
-    fontSize: '18px',
-    marginTop: '10px',
+
+  blue: {
+    color: '#2563EB',
+    display: 'block',
   },
-  heroBtnGroup: {
-    marginTop: '30px',
+
+  heroText: {
+    maxWidth: 720,
+    margin: '0 auto 24px',
+    color: '#475569',
+    fontSize: 18,
+    lineHeight: 1.7,
+  },
+
+  badge: {
+    display: 'inline-block',
+    padding: '10px 18px',
+    borderRadius: 999,
+    background: '#E2E8F0',
+    color: '#334155',
+    fontSize: 12,
+    fontWeight: 700,
+    letterSpacing: 0.6,
+    marginBottom: 28,
+  },
+
+  ctaRow: {
     display: 'flex',
-    gap: '15px',
+    gap: 16,
     justifyContent: 'center',
     flexWrap: 'wrap',
   },
+
   primaryBtn: {
-    backgroundColor: '#EAB308',
-    color: '#0F172A',
+    background: '#EAB308',
+    color: '#111827',
     border: 'none',
-    padding: '12px 24px',
-    borderRadius: '6px',
-    fontWeight: 'bold',
+    padding: '16px 24px',
+    borderRadius: 14,
+    fontWeight: 700,
     cursor: 'pointer',
-    fontSize: '16px',
+    fontSize: 16,
   },
+
   secondaryBtn: {
-    backgroundColor: 'transparent',
-    color: '#FFFFFF',
-    border: '2px solid #334155',
-    padding: '12px 24px',
-    borderRadius: '6px',
-    fontWeight: 'bold',
+    background: '#FFFFFF',
+    color: '#111827',
+    border: '1px solid #CBD5E1',
+    padding: '16px 24px',
+    borderRadius: 14,
+    fontWeight: 700,
     cursor: 'pointer',
-    fontSize: '16px',
+    fontSize: 16,
   },
-  servicesSection: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '20px',
-    padding: '40px 20px',
-    maxWidth: '1100px',
+
+  services: {
+    maxWidth: 1100,
     margin: '0 auto',
+    padding: '40px 20px 60px',
   },
-  card: {
-    backgroundColor: '#FFFFFF',
-    padding: '24px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+
+  sectionTitle: {
     textAlign: 'center',
+    fontSize: 36,
+    marginBottom: 12,
   },
+
+  sectionText: {
+    textAlign: 'center',
+    color: '#475569',
+    marginBottom: 36,
+    fontSize: 16,
+  },
+
+  cardGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+    gap: 24,
+  },
+
+  card: {
+    background: '#FFFFFF',
+    border: '1px solid #E2E8F0',
+    borderRadius: 20,
+    padding: 28,
+    boxShadow: '0 4px 12px rgba(15,23,42,0.04)',
+  },
+
   cardIcon: {
-    fontSize: '32px',
+    width: 48,
+    height: 48,
+    borderRadius: 12,
+    background: '#DBEAFE',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 24,
   },
+
   formSection: {
-    maxWidth: '600px',
-    margin: '40px auto',
-    padding: '30px 20px',
-    backgroundColor: '#FFFFFF',
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+    maxWidth: 760,
+    margin: '0 auto',
+    padding: '20px 20px 80px',
   },
+
+  formCard: {
+    background: '#FFFFFF',
+    border: '1px solid #E2E8F0',
+    borderRadius: 24,
+    padding: 32,
+    boxShadow: '0 8px 24px rgba(15,23,42,0.06)',
+  },
+
+  tabRow: {
+    display: 'flex',
+    gap: 12,
+    marginBottom: 24,
+  },
+
+  tabBtn: {
+    flex: 1,
+    padding: 14,
+    borderRadius: 12,
+    border: '1px solid #CBD5E1',
+    background: '#FFFFFF',
+    cursor: 'pointer',
+    fontWeight: 700,
+  },
+
+  activeTab: {
+    background: '#111827',
+    color: '#FFFFFF',
+    borderColor: '#111827',
+  },
+
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '15px',
-    marginTop: '20px',
+    gap: 16,
   },
+
   input: {
-    padding: '12px',
-    borderRadius: '6px',
+    padding: 16,
+    borderRadius: 12,
     border: '1px solid #CBD5E1',
-    fontSize: '14px',
+    fontSize: 16,
   },
+
   textarea: {
-    padding: '12px',
-    borderRadius: '6px',
+    padding: 16,
+    borderRadius: 12,
     border: '1px solid #CBD5E1',
-    fontSize: '14px',
+    fontSize: 16,
+    resize: 'vertical',
   },
+
   submitBtn: {
-    backgroundColor: '#0F172A',
-    color: '#FFFFFF',
+    background: '#EAB308',
+    color: '#111827',
     border: 'none',
-    padding: '14px',
-    borderRadius: '6px',
-    fontWeight: 'bold',
+    padding: 16,
+    borderRadius: 14,
+    fontWeight: 800,
     cursor: 'pointer',
+    fontSize: 16,
   },
+
   footer: {
-    backgroundColor: '#0F172A',
+    background: '#0B132B',
     color: '#FFFFFF',
-    padding: '40px 20px',
     textAlign: 'center',
+    padding: '56px 20px',
   },
+
   footerLogo: {
-    fontSize: '28px',
-    marginBottom: '10px',
+    width: 72,
+    height: 72,
+    borderRadius: '50%',
+    background: '#111827',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto 16px',
+    fontSize: 32,
   },
+
   footerLine: {
-    height: '1px',
-    backgroundColor: '#1E293B',
-    margin: '20px auto',
-    maxWidth: '400px',
+    height: 1,
+    background: '#253047',
+    maxWidth: 720,
+    margin: '28px auto',
   },
+
   whatsappBtn: {
     position: 'fixed',
     bottom: 24,
