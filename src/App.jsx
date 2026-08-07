@@ -1,5 +1,33 @@
 import React, { useState } from 'react';
 
+// Custom inline SVG matching the Zeenotech node logo
+function ZeenotechLogo({ size = 42, color = "#2563EB" }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      {/* Central Node */}
+      <circle cx="50" cy="50" r="18" fill={color} />
+      
+      {/* Network Lines */}
+      <line x1="50" y1="32" x2="50" y2="18" stroke={color} strokeWidth="5" strokeLinecap="round" />
+      <line x1="62" y1="40" x2="75" y2="30" stroke={color} strokeWidth="5" strokeLinecap="round" />
+      <line x1="67" y1="52" x2="80" y2="52" stroke={color} strokeWidth="5" strokeLinecap="round" />
+      <line x1="60" y1="62" x2="70" y2="73" stroke={color} strokeWidth="5" strokeLinecap="round" />
+      <line x1="38" y1="62" x2="24" y2="76" stroke={color} strokeWidth="7" strokeLinecap="round" />
+      <line x1="33" y1="52" x2="20" y2="52" stroke={color} strokeWidth="4" strokeLinecap="round" />
+      <line x1="36" y1="40" x2="22" y2="28" stroke={color} strokeWidth="7" strokeLinecap="round" />
+
+      {/* Outer Nodes */}
+      <circle cx="50" cy="14" r="5" stroke={color} strokeWidth="4" fill="#F8FAFC" />
+      <circle cx="78" cy="27" r="5" stroke={color} strokeWidth="4" fill="#F8FAFC" />
+      <circle cx="83" cy="52" r="7" stroke={color} strokeWidth="5" fill="#F8FAFC" />
+      <circle cx="73" cy="76" r="7" stroke={color} strokeWidth="5" fill="#F8FAFC" />
+      <circle cx="20" cy="79" r="8" stroke={color} strokeWidth="6" fill="#F8FAFC" />
+      <circle cx="18" cy="52" r="4" stroke={color} strokeWidth="4" fill="#F8FAFC" />
+      <circle cx="18" cy="24" r="10" stroke={color} strokeWidth="6" fill="#F8FAFC" />
+    </svg>
+  );
+}
+
 export default function App() {
   const [showRepair, setShowRepair] = useState(false);
   const [showSourcing, setShowSourcing] = useState(false);
@@ -9,7 +37,9 @@ export default function App() {
       {/* NAVBAR */}
       <nav style={styles.nav}>
         <div style={styles.brand}>
-          <div style={styles.logo}>Z</div>
+          <div style={styles.logoWrapper}>
+            <ZeenotechLogo size={38} color="#2563EB" />
+          </div>
           <div>
             <div style={styles.brandName}>ZEENOTECH</div>
             <div style={styles.brandTag}>Properly Sourced. Tested. Delivered.</div>
@@ -69,9 +99,13 @@ export default function App() {
         <div style={styles.heroVisual}>
           <div style={styles.visualCircle}>
             <div style={styles.laptop}>
-              <div style={styles.screen}>Z</div>
+              <div style={styles.screen}>
+                <ZeenotechLogo size={50} color="#EAB308" />
+              </div>
             </div>
-            <div style={styles.phone}>Z</div>
+            <div style={styles.phone}>
+              <ZeenotechLogo size={28} color="#EAB308" />
+            </div>
           </div>
         </div>
       </section>
@@ -238,7 +272,7 @@ const styles = {
   page: { fontFamily: 'Inter, system-ui, sans-serif', background: '#F8FAFC', color: '#0F172A', minHeight: '100vh', overflowX: 'hidden' },
   nav: { maxWidth: 1200, margin: '0 auto', padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 },
   brand: { display: 'flex', alignItems: 'center', gap: 12 },
-  logo: { width: 42, height: 42, borderRadius: 12, background: '#EAB308', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, fontSize: 22, flexShrink: 0 },
+  logoWrapper: { width: 44, height: 44, borderRadius: 12, background: '#EFF6FF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: '1px solid #DBEAFE' },
   brandName: { fontWeight: 800, fontSize: 20 },
   brandTag: { fontSize: 11, color: '#64748B' },
   navBtn: { background: '#EAB308', border: 'none', padding: '10px 16px', borderRadius: 12, fontWeight: 700, cursor: 'pointer', fontSize: 14 },
@@ -261,8 +295,8 @@ const styles = {
   heroVisual: { display: 'flex', justifyContent: 'center', padding: '10px 0' },
   visualCircle: { width: '100%', maxWidth: 320, aspectRatio: '1/1', borderRadius: '50%', background: 'radial-gradient(circle at 30% 20%, #EFF6FF 0%, #DBEAFE 45%, #F8FAFC 100%)', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 20px 50px rgba(37,99,235,.12)' },
   laptop: { width: '70%', aspectRatio: '1.3/1', background: '#111827', borderRadius: 18, padding: 8, transform: 'rotate(-6deg)', boxShadow: '0 15px 35px rgba(15,23,42,.35)' },
-  screen: { width: '100%', height: '100%', borderRadius: 12, background: 'linear-gradient(135deg,#0F172A 0%,#1D4ED8 100%)', color: '#EAB308', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 42, fontWeight: 900 },
-  phone: { position: 'absolute', left: '6%', bottom: '12%', width: 64, height: 120, borderRadius: 18, background: 'linear-gradient(135deg,#111827 0%,#2563EB 100%)', color: '#EAB308', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 900, boxShadow: '0 12px 30px rgba(15,23,42,.28)' },
+  screen: { width: '100%', height: '100%', borderRadius: 12, background: 'linear-gradient(135deg,#0F172A 0%,#1D4ED8 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  phone: { position: 'absolute', left: '6%', bottom: '12%', width: 64, height: 120, borderRadius: 18, background: 'linear-gradient(135deg,#111827 0%,#2563EB 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 12px 30px rgba(15,23,42,.28)' },
 
   section: { maxWidth: 1200, margin: '0 auto', padding: '30px 20px 50px', textAlign: 'center' },
   sectionTag: { color: '#2563EB', fontWeight: 800, fontSize: 12, letterSpacing: 1, marginBottom: 8 },
