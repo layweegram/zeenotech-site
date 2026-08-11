@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 
-// Zeenotech node logo, unchanged from the approved mark
+// Zeenotech node logo
 function ZeenotechLogo({ size = 42, color = "#2563EB" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
@@ -22,14 +23,6 @@ function ZeenotechLogo({ size = 42, color = "#2563EB" }) {
     </svg>
   );
 }
-
-// ---------------------------------------------------------------
-// CONTENT NOTE FOR THE FOUNDER
-// Every value below marked [FOUNDER TO CONFIRM] is a placeholder.
-// Structure and flow are locked for this MVP. Swap the marked
-// values with real pricing, categories, addresses, and reviews
-// and this is ready to point real traffic at.
-// ---------------------------------------------------------------
 
 const QUICK_LINKS = [
   { label: "Screen Repair", target: "services" },
@@ -93,23 +86,25 @@ const TRUST_AGAINST = [
   "Devices that go quiet with no updates",
 ];
 
+// Local assets in public/images/
 const LOCATIONS = [
   {
     name: "Computer Village Hub",
     note: "Partnership repair and sourcing point, Ikeja [FOUNDER TO CONFIRM ADDRESS]",
-    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=70",
+    image: "/images/ikeja-hub.jpg",
   },
   {
     name: "Igando Drop-off",
     note: "Device intake and pickup point [FOUNDER TO CONFIRM ADDRESS]",
-    image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=800&q=70",
+    image: "/images/igando-dropoff.jpg",
   },
 ];
 
+// Replaced pravatar links with clean initials fallback
 const TESTIMONIALS = [
-  { name: "[FOUNDER TO ADD]", text: "[Pull 3 real reviews from WhatsApp or Google here before launch]", rating: 5, avatar: "https://i.pravatar.cc/150?img=32" },
-  { name: "[FOUNDER TO ADD]", text: "[Placeholder so the layout is not empty]", rating: 5, avatar: "https://i.pravatar.cc/150?img=47" },
-  { name: "[FOUNDER TO ADD]", text: "[Placeholder so the layout is not empty]", rating: 5, avatar: "https://i.pravatar.cc/150?img=25" },
+  { name: "[FOUNDER TO ADD]", text: "[Pull 3 real reviews from WhatsApp or Google here before launch]", rating: 5, initials: "KO" },
+  { name: "[FOUNDER TO ADD]", text: "[Placeholder so the layout is not empty]", rating: 5, initials: "ZT" },
+  { name: "[FOUNDER TO ADD]", text: "[Placeholder so the layout is not empty]", rating: 5, initials: "CU" },
 ];
 
 export default function App() {
@@ -179,12 +174,16 @@ export default function App() {
           </div>
         </div>
 
+        {/* HERO VISUAL */}
         <div style={styles.heroVisual}>
-          <div style={styles.photoFrame}>
-            <img
-              src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=900&q=70"
-              alt="Technician repairing a smartphone"
-              style={styles.photoImg}
+          <div style={{ ...styles.photoFrame, position: 'relative' }}>
+            <Image
+              src="/images/hero-diagnostic.jpg"
+              alt="Technician diagnostic workspace"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 340px"
+              style={{ objectFit: 'cover' }}
             />
           </div>
 
@@ -206,7 +205,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* WE STAND FOR / WE DON'T DO */}
+      {/* WHERE WE STAND */}
       <section style={styles.section}>
         <div style={styles.sectionTag}>WHERE WE STAND</div>
         <h2 style={styles.sectionTitle}>What you get, and what you will not</h2>
@@ -231,11 +230,13 @@ export default function App() {
           </div>
         </div>
 
-        <div style={styles.photoFrameWide}>
-          <img
-            src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=70"
-            alt="Technician showing a customer their device"
-            style={styles.photoImg}
+        <div style={{ ...styles.photoFrameWide, position: 'relative' }}>
+          <Image
+            src="/images/trust-inspection.jpg"
+            alt="Device inspection and customer handover"
+            fill
+            sizes="(max-width: 768px) 100vw, 640px"
+            style={{ objectFit: 'cover' }}
           />
         </div>
       </section>
@@ -304,8 +305,14 @@ export default function App() {
         <div style={styles.locationGrid}>
           {LOCATIONS.map((l) => (
             <div key={l.name} style={styles.locationCard}>
-              <div style={styles.locationPhotoFrame}>
-                <img src={l.image} alt={l.name} style={styles.photoImg} />
+              <div style={{ ...styles.locationPhotoFrame, position: 'relative' }}>
+                <Image
+                  src={l.image}
+                  alt={l.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 300px"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
               <div style={styles.locationName}>{l.name}</div>
               <div style={styles.locationNote}>{l.note}</div>
@@ -321,7 +328,7 @@ export default function App() {
         <div style={styles.grid}>
           {TESTIMONIALS.map((t, i) => (
             <div key={i} style={styles.card}>
-              <img src={t.avatar} alt="Customer" style={styles.avatarImg} />
+              <div style={styles.avatarBadge}>{t.initials}</div>
               <div style={styles.stars}>{"★".repeat(t.rating)}</div>
               <p style={styles.cardText}>{t.text}</p>
               <div style={styles.testimonialName}>{t.name}</div>
@@ -369,7 +376,7 @@ export default function App() {
       </footer>
 
       {/* WHATSAPP */}
-      
+      <a
         href="https://wa.me/2348139650067?text=Hello%20Zeenotech,%20I%20need%20help%20with%20my%20device."
         target="_blank"
         rel="noreferrer"
@@ -463,8 +470,9 @@ const styles = {
   photoFrame: { width: '100%', maxWidth: 340, aspectRatio: '4/3', borderRadius: 20, overflow: 'hidden', boxShadow: '0 20px 50px rgba(37,99,235,.15)' },
   photoFrameWide: { width: '100%', maxWidth: 640, aspectRatio: '16/6', margin: '24px auto 0', borderRadius: 20, overflow: 'hidden', boxShadow: '0 15px 40px rgba(15,23,42,.10)' },
   locationPhotoFrame: { width: '100%', aspectRatio: '16/9', borderRadius: 12, overflow: 'hidden', marginBottom: 12 },
-  photoImg: { width: '100%', height: '100%', objectFit: 'cover', display: 'block' },
-  avatarImg: { width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', marginBottom: 10, border: '2px solid #EFF6FF' },
+  
+  avatarBadge: { width: 40, height: 40, borderRadius: '50%', background: '#EFF6FF', color: BLUE, fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10, border: '2px solid #DBEAFE', fontSize: 14 },
+
   trailCard: { width: '100%', maxWidth: 340, background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 20, padding: 24, boxShadow: '0 20px 50px rgba(37,99,235,.10)' },
   trailLabel: { fontSize: 13, fontWeight: 700, color: BLUE, marginBottom: 18 },
   trailRow: { display: 'flex', gap: 12 },
