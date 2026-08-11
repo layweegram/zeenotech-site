@@ -97,12 +97,12 @@ const LOCATIONS = [
   {
     name: "Computer Village Hub",
     note: "Partnership repair and sourcing point, Ikeja [FOUNDER TO CONFIRM ADDRESS]",
-    image: "https://picsum.photos/seed/zeeno-hub/800/450",
+    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=70",
   },
   {
     name: "Igando Drop-off",
     note: "Device intake and pickup point [FOUNDER TO CONFIRM ADDRESS]",
-    image: "https://picsum.photos/seed/zeeno-igando/800/450",
+    image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=800&q=70",
   },
 ];
 
@@ -157,8 +157,6 @@ export default function App() {
             verified devices, and real status updates from start to finish.
           </p>
 
-          {/* QUICK ACCESS PILLS — this is the piece the old hero was missing.
-              People land here to do a specific thing, not to read a mission statement. */}
           <div style={styles.pillRow}>
             {QUICK_LINKS.map((q) => (
               <button key={q.label} style={styles.pill} onClick={() => scrollTo(q.target)}>
@@ -181,15 +179,10 @@ export default function App() {
           </div>
         </div>
 
-        {/* SIGNATURE ELEMENT — the device journey trail.
-            This replaces the decorative 3D illustration with something that
-            proves the "completely traceable" claim instead of just stating it. */}
         <div style={styles.heroVisual}>
-          {/* Swap src below once the founder has real Zeenotech shop photography.
-              This is a licensed Unsplash placeholder, not a Zeenotech photo. */}
           <div style={styles.photoFrame}>
             <img
-              src="https://picsum.photos/seed/zeeno-hero/900/675"
+              src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=900&q=70"
               alt="Technician repairing a smartphone"
               style={styles.photoImg}
             />
@@ -213,7 +206,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* WE STAND FOR / WE DON'T DO — the trust position the old page only implied */}
+      {/* WE STAND FOR / WE DON'T DO */}
       <section style={styles.section}>
         <div style={styles.sectionTag}>WHERE WE STAND</div>
         <h2 style={styles.sectionTitle}>What you get, and what you will not</h2>
@@ -238,17 +231,16 @@ export default function App() {
           </div>
         </div>
 
-        {/* Swap src once real Zeenotech team or shop-floor photography is ready */}
         <div style={styles.photoFrameWide}>
           <img
-            src="https://picsum.photos/seed/zeeno-trust/1400/525"
+            src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=70"
             alt="Technician showing a customer their device"
             style={styles.photoImg}
           />
         </div>
       </section>
 
-      {/* SERVICES — now with a price anchor and a real action per card, not just a label */}
+      {/* SERVICES */}
       <section id="services" style={styles.section}>
         <div style={styles.sectionTag}>WHAT WE DO</div>
         <h2 style={styles.sectionTitle}>Repair, Buy, Upgrade & Swap</h2>
@@ -267,8 +259,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* SHOP CATEGORIES — the piece tied to the 20 categories already locked internally.
-          This is where a real catalog plugs in later; for now it proves the sitemap has a shop. */}
+      {/* SHOP CATEGORIES */}
       <section id="shop" style={styles.sectionAlt}>
         <div style={styles.sectionTag}>SHOP</div>
         <h2 style={styles.sectionTitle}>Browse by category</h2>
@@ -285,7 +276,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* TRACK ORDER — delivers on the headline promise instead of leaving it as a claim */}
+      {/* TRACK ORDER */}
       <section id="track" style={styles.section}>
         <div style={styles.sectionTag}>STATUS</div>
         <h2 style={styles.sectionTitle}>Track your repair or order</h2>
@@ -313,7 +304,6 @@ export default function App() {
         <div style={styles.locationGrid}>
           {LOCATIONS.map((l) => (
             <div key={l.name} style={styles.locationCard}>
-              {/* Swap src once the founder confirms real hub/drop-off photography */}
               <div style={styles.locationPhotoFrame}>
                 <img src={l.image} alt={l.name} style={styles.photoImg} />
               </div>
@@ -331,7 +321,6 @@ export default function App() {
         <div style={styles.grid}>
           {TESTIMONIALS.map((t, i) => (
             <div key={i} style={styles.card}>
-              {/* Swap src once real customer photos are available */}
               <img src={t.avatar} alt="Customer" style={styles.avatarImg} />
               <div style={styles.stars}>{"★".repeat(t.rating)}</div>
               <p style={styles.cardText}>{t.text}</p>
@@ -380,7 +369,7 @@ export default function App() {
       </footer>
 
       {/* WHATSAPP */}
-      <a
+      
         href="https://wa.me/2348139650067?text=Hello%20Zeenotech,%20I%20need%20help%20with%20my%20device."
         target="_blank"
         rel="noreferrer"
