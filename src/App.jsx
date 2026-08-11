@@ -157,8 +157,6 @@ export default function App() {
             verified devices, and real status updates from start to finish.
           </p>
 
-          {/* QUICK ACCESS PILLS — this is the piece the old hero was missing.
-              People land here to do a specific thing, not to read a mission statement. */}
           <div style={styles.pillRow}>
             {QUICK_LINKS.map((q) => (
               <button key={q.label} style={styles.pill} onClick={() => scrollTo(q.target)}>
@@ -181,11 +179,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* SIGNATURE ELEMENT — the device journey trail.
-            This replaces the decorative 3D illustration with something that
-            proves the "completely traceable" claim instead of just stating it. */}
         <div style={styles.heroVisual}>
-          {/* Swap src below once the founder has real Zeenotech shop photography. */}
           <div style={styles.photoFrame}>
             <img
               src="https://picsum.photos/seed/zeeno-hero/900/675"
@@ -212,7 +206,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* WE STAND FOR / WE DON'T DO — the trust position the old page only implied */}
+      {/* WE STAND FOR / WE DON'T DO */}
       <section style={styles.section}>
         <div style={styles.sectionTag}>WHERE WE STAND</div>
         <h2 style={styles.sectionTitle}>What you get, and what you will not</h2>
@@ -237,7 +231,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Swap src once real Zeenotech team or shop-floor photography is ready */}
         <div style={styles.photoFrameWide}>
           <img
             src="https://picsum.photos/seed/zeeno-trust/1400/525"
@@ -247,7 +240,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* SERVICES — now with a price anchor and a real action per card, not just a label */}
+      {/* SERVICES */}
       <section id="services" style={styles.section}>
         <div style={styles.sectionTag}>WHAT WE DO</div>
         <h2 style={styles.sectionTitle}>Repair, Buy, Upgrade & Swap</h2>
@@ -266,7 +259,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* SHOP CATEGORIES — the piece tied to the 20 categories already locked internally. */}
+      {/* SHOP CATEGORIES */}
       <section id="shop" style={styles.sectionAlt}>
         <div style={styles.sectionTag}>SHOP</div>
         <h2 style={styles.sectionTitle}>Browse by category</h2>
@@ -283,7 +276,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* TRACK ORDER — delivers on the headline promise instead of leaving it as a claim */}
+      {/* TRACK ORDER */}
       <section id="track" style={styles.section}>
         <div style={styles.sectionTag}>STATUS</div>
         <h2 style={styles.sectionTitle}>Track your repair or order</h2>
@@ -311,7 +304,6 @@ export default function App() {
         <div style={styles.locationGrid}>
           {LOCATIONS.map((l) => (
             <div key={l.name} style={styles.locationCard}>
-              {/* Swap src once the founder confirms real hub/drop-off photography */}
               <div style={styles.locationPhotoFrame}>
                 <img src={l.image} alt={l.name} style={styles.photoImg} />
               </div>
@@ -329,7 +321,6 @@ export default function App() {
         <div style={styles.grid}>
           {TESTIMONIALS.map((t, i) => (
             <div key={i} style={styles.card}>
-              {/* Swap src once real customer photos are available */}
               <img src={t.avatar} alt="Customer" style={styles.avatarImg} />
               <div style={styles.stars}>{"★".repeat(t.rating)}</div>
               <p style={styles.cardText}>{t.text}</p>
@@ -541,11 +532,4 @@ const styles = {
   whatsappTitle: { fontSize: 12, fontWeight: 800, color: '#25D366', lineHeight: 1 },
   whatsappSub: { fontSize: 10, color: '#94A3B8', marginTop: 2 },
 
-  overlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15,23,42,.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, zIndex: 2000, backdropFilter: 'blur(4px)' },
-  modal: { background: '#FFFFFF', borderRadius: 20, width: '100%', maxWidth: 440, padding: 20, boxShadow: '0 20px 40px rgba(0,0,0,.15)' },
-  modalHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
-  close: { background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#64748B' },
-  modalBody: { display: 'flex', flexDirection: 'column', gap: 12 },
-  input: { width: '100%', padding: 12, borderRadius: 10, border: '1px solid #CBD5E1', outline: 'none', fontSize: 14, boxSizing: 'border-box' },
-  textarea: { width: '100%', padding: 12, borderRadius: 10, border: '1px solid #CBD5E1', outline: 'none', fontSize: 14, minHeight: 80, resize: 'vertical', boxSizing: 'border-box' },
-};
+  overlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15,23,42,.6)', display: 'flex',
