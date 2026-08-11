@@ -532,4 +532,11 @@ const styles = {
   whatsappTitle: { fontSize: 12, fontWeight: 800, color: '#25D366', lineHeight: 1 },
   whatsappSub: { fontSize: 10, color: '#94A3B8', marginTop: 2 },
 
-  overlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15,23,42,.6)', display: 'flex',
+  overlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15,23,42,.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16, zIndex: 2000, backdropFilter: 'blur(4px)' },
+  modal: { background: '#FFFFFF', borderRadius: 20, width: '100%', maxWidth: 440, padding: 20, boxShadow: '0 20px 40px rgba(0,0,0,.15)' },
+  modalHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
+  close: { background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#64748B' },
+  modalBody: { display: 'flex', flexDirection: 'column', gap: 12 },
+  input: { width: '100%', padding: 12, borderRadius: 10, border: '1px solid #CBD5E1', outline: 'none', fontSize: 14, boxSizing: 'border-box' },
+  textarea: { width: '100%', padding: 12, borderRadius: 10, border: '1px solid #CBD5E1', outline: 'none', fontSize: 14, minHeight: 80, resize: 'vertical', boxSizing: 'border-box' },
+};
